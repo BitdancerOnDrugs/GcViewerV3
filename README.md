@@ -22,7 +22,7 @@ You can require them individually as needed:
 local FindFunc = require(path.to.Utility.FindFunction)
 local SerializeTable = require(path.to.Utility.serialize_table)
 ```
--- and so on
+and so on
 
 Feel free to explore their code to understand their functionality or adapt them for your specific use case.
 <br/>
