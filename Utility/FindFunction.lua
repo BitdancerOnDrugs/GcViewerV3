@@ -59,6 +59,18 @@ function FindFunc:CheckUpvalues(func, totalUpvalues, expected)
 
     return true
 end
+
+function FindFunc:CheckProtos(func, expectedProtoCount)
+    assert(typeof(func) == "function", "First argument must be a function")
+    assert(typeof(expectedProtoCount) == "number", "Second argument must be a number")
+
+    local protos = debug.getprotos(func)
+    if not protos then
+        return false
+    end
+
+    return #protos == expectedProtoCount
+end
 function FindFunc:GcLookUp(val, callback, filter)
     for i, v in next, getgc(val and true or nil) do
         if typeof(v) == "function" and islclosure(v) and not isexecutorclosure(v) then
@@ -98,9 +110,39 @@ function FindFunc:FindFunctionsByUpvalues(expectedCount, expectedUpvalues)
     end)
     return found
 end
+function FindFunc:FindFunctionsByProtoCount(count)
+    local found = {}
+    self:GcLookUp(true, function(_, func)
+        if self:CheckProtos(func, count) then
+            table.insert(found, func)
+        end
+    end)
+    return found
+end
+function FindFunc:FindFunctionsByScript(script)
+    if not getscriptfromfunction then
+        return {}
+    end
+    local found = {}
+    self:GcLookUp(true, function(_, func)
+        if getscriptfromfunction(func) == script then
+            table.insert(found, func)
+        end
+    end)
+    return found
+end
+function FindFunc:GetAllMatching(filterFunc)
+    local found = {}
+    self:GcLookUp(true, function(_, func)
+        if filterFunc(func) then
+            table.insert(found, func)
+        end
+    end)
+    return found
+end
 function FindFunc.getscriptfromthread(script)
     if not getscriptfromthread then
-        return "Executor doesnt not support getscriptfromthread"
+        return "Executor doesnt support getscriptfromthread"
     end
     for i,v in next, getreg() do 
         if typeof(v) == "thread" and getscriptfromthread(v) == script then
@@ -110,7 +152,7 @@ function FindFunc.getscriptfromthread(script)
 end
 function FindFunc.getscriptfromfunction(f)
     if not getscriptfromfunction then
-        return "Executor doesnt not support getscriptfromfunction"
+        return "Executor doesnt support getscriptfromfunction"
     end
     return getscriptfromfunction(f)
 end
