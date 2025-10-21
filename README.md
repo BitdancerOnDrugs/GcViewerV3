@@ -10,8 +10,8 @@ This project includes a set of utility modules inside the `Utility` folder to su
 
 - `FindFunction.lua` — Core module to find and filter Lua functions in the GC by constants, upvalues, protos, scripts, and more.  
 - `Build.lua` — Utility for building or compiling certain data structures or filtered results (custom logic depends on your implementation).  
-- `Data2Code@Amity.lua` — Likely converts serialized data back into Lua code (serialization/deserialization helper).  
-- `Idm.lua` — Possibly a module managing IDs or metadata for tracked functions or scripts.  
+- `Data2Code@Amity.lua` — Converts serialized data back into Lua code (serialization/deserialization helper).  
+- `Idm.lua` — Module managing metadata for tracked functions or scripts.  
 - `serialize_table.lua` — Helper to serialize Lua tables into string representations (for dumping or saving data).
 
 These utilities work together to enable powerful GC exploration and manipulation, and can be used standalone or integrated into your tooling.
