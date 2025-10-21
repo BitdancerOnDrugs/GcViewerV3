@@ -9,10 +9,10 @@ GcViewerV3 helps you scan, filter, and inspect functions tracked by the garbage 
 This project includes a set of utility modules inside the `Utility` folder to support advanced GC inspection and manipulation:
 
 - `FindFunction.lua` — Core module to find and filter Lua functions in the GC by constants, upvalues, protos, scripts, and more.  
-- `Build.lua` — Utility for building or compiling certain data structures or filtered results (custom logic depends on your implementation).  
-- `Data2Code@Amity.lua` — Converts serialized data back into Lua code (serialization/deserialization helper).  
-- `Idm.lua` — Module managing metadata for tracked functions or scripts.  
-- `serialize_table.lua` — Helper to serialize Lua tables into string representations (for dumping or saving data).
+- `Build.lua` — Minimal metadata module. Returns a table proxy.  
+- `Data2Code@Amity.lua` — A comprehensive Lua data serializer that converts complex Lua values, including tables, functions, and primitives, into Lua source code strings.  
+- `Idm.lua` — IDE / metadata module.  
+- `serialize_table.lua` — Simple table serializer that converts Lua tables into nicely formatted Lua source code strings for quick dumps or debug prints..
 
 These utilities work together to enable powerful GC exploration and manipulation, and can be used standalone or integrated into your tooling.
 
