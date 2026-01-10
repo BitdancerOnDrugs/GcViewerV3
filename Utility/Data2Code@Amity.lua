@@ -10,7 +10,7 @@ local DefaultMethods = {}
 local Methods = setmetatable({}, {__index = DefaultMethods})
 local Class = {
 	Methods = Methods,
-	_tostringUnsupported = false, -- whether or not to tostring unsupported types
+	_tostringUnsupported = false,
 	_Serializeinf = false,
 	__VERSION = "1.0"
 }
