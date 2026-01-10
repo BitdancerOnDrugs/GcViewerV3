@@ -70,11 +70,11 @@ local function serialize_table(t, p, c, s)
             local info = debug.getinfo(v)
             return string.format('"function [%s @ %s]"', info.name or "?", info.short_src or "?")
         elseif typ == "string" then
-            return string.format("%q", v)
+            return string.format("%q", v) -- properly quoted string
         elseif typ == "number" or typ == "boolean" then
-            return tostring(v)
+            return tostring(v) -- keep numbers and booleans unquoted
         else
-            return string.format('"%s"', tostring(v))
+            return string.format('"%s"', tostring(v)) -- quote other types (like userdata, threads, etc.)
         end
     end
 
